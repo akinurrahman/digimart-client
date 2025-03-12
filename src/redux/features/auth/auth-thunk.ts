@@ -1,5 +1,4 @@
 import { User } from "@/constants/interface-constants";
-import apiClient from "@/services/api/api-client";
 import generateApis from "@/services/api/rest-api";
 import { getErrorMessage } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";

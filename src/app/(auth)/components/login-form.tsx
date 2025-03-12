@@ -2,8 +2,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { APP_NAME } from "@/constants";
 import { Form } from "@/components/ui/form";
 import { SubmitHandler, useForm } from "react-hook-form";

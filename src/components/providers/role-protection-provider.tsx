@@ -50,7 +50,7 @@ const RoleProtectionProvider = ({
         setLoading(false);
       }
     }
-  }, [user, allowedRoles, router, pathname]);
+  }, [user, allowedRoles, router, pathname, dispatch]);
 
   if (loading) return <FullPageLoader />;
 
