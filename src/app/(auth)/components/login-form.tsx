@@ -47,7 +47,7 @@ export function LoginForm({
     try {
       const response = await dispatch(loginApi(data)).unwrap();
       router.push(
-        redirectionPath || defaultProtectedRoutes[response.user.role]
+        redirectionPath || defaultProtectedRoutes[response.data.user.role]
       );
     } catch (error) {
       console.error("Login Failed:", error);

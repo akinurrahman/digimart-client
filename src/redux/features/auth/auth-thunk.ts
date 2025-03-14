@@ -1,4 +1,4 @@
-import { User } from "@/constants/interface-constants";
+import { ApiResponse, User } from "@/constants/interface-constants";
 import generateApis from "@/services/api/rest-api";
 import { getErrorMessage } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -11,7 +11,7 @@ type AuthResponse = {
 type ErrorMessage = string; // error return type
 
 export const loginApi = createAsyncThunk<
-  AuthResponse,
+  ApiResponse<AuthResponse>,
   LoginPayload,
   { rejectValue: ErrorMessage }
 >("auth/login", async (data, { rejectWithValue }) => {

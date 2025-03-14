@@ -44,9 +44,9 @@ const authSlice = createSlice({
       })
       .addCase(loginApi.fulfilled, (state, action) => {
         state.loading = false;
-        state.accessToken = action.payload.accessToken;
-        state.user = action.payload.user;
-        saveToLocalStorage(AUTH_USER_KEY, action.payload.user);
+        state.accessToken = action.payload.data.accessToken;
+        state.user = action.payload.data.user;
+        saveToLocalStorage(AUTH_USER_KEY, action.payload.data.user);
       })
       .addCase(loginApi.rejected, (state) => {
         state.loading = false;

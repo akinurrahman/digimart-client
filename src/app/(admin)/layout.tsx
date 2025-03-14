@@ -7,7 +7,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <RoleProtectionProvider allowedRoles={["user"]}>
+    <RoleProtectionProvider allowedRoles={["admin"]}>
       {children}
     </RoleProtectionProvider>
   );

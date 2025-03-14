@@ -10,8 +10,23 @@ const generateApis = (resourcePath: string, version?: string) => {
     url: string = "",
     data?: object
   ) => {
-    const response = await apiClient({ method, url: `${baseURL}${url}`, data });
-    return response.data.data;
+    try {
+      const response = await apiClient({
+        method,
+        url: `${baseURL}${url}`,
+        data,
+      });
+      return {
+        data: response.data?.data,
+        message: response.data?.message ?? null,
+      };
+    } catch (error: any) {
+      console.error(
+        `API Error [${method.toUpperCase()} ${baseURL}${url}]:`,
+        error
+      );
+      throw error;
+    }
   };
 
   return {
