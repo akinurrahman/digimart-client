@@ -13,56 +13,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Category, Subcategory } from "./category-management";
+import { useFetchCategories } from "../hooks/useFetchCategories";
+import { useAddSubCategory } from "../hooks/useAddCategory";
 
-type SubcategoryFormProps = {
-  onSubmit: (subcategory: Omit<Subcategory, "id">) => void;
-  categories: Category[];
-  initialValues?: { name: string; parentId: string };
-};
-
-export function SubcategoryForm({
-  onSubmit,
-  categories,
-  initialValues = { name: "", parentId: "" },
-}: SubcategoryFormProps) {
-  const [name, setName] = useState(initialValues.name);
-  const [parentId, setParentId] = useState(initialValues.parentId);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export function SubcategoryForm() {
+  const [name, setName] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const { data: categories } = useFetchCategories();
+  const { mutate: addSubCategory, isPending } = useAddSubCategory();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!name.trim()) {
       return;
     }
-
-    if (!parentId) {
+    if (!categoryId) {
       return;
     }
-
-    setIsSubmitting(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      onSubmit({ name, parentId });
-      setName("");
-      setParentId("");
-      setIsSubmitting(false);
-    }, 500);
+    addSubCategory({ categoryId, name });
+    setName("");
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="parent-category">Parent Category</Label>
-        <Select value={parentId} onValueChange={setParentId} required>
+        <Select value={categoryId} onValueChange={setCategoryId} required>
           <SelectTrigger id="parent-category" className="w-full">
             <SelectValue placeholder="Select a parent category" />
           </SelectTrigger>
           <SelectContent>
-            {categories.map((category) => (
-              <SelectItem key={category.id} value={category.id}>
+            {categories?.data.map((category) => (
+              <SelectItem key={category._id} value={category._id}>
                 {category.name}
               </SelectItem>
             ))}
@@ -81,8 +63,8 @@ export function SubcategoryForm({
         />
       </div>
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Creating..." : "Create Subcategory"}
+      <Button type="submit" className="w-full" disabled={isPending}>
+        {isPending ? "Creating..." : "Create Subcategory"}
       </Button>
     </form>
   );

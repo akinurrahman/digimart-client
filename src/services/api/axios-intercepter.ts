@@ -33,7 +33,9 @@ apiClient.interceptors.response.use(
       }
     }
 
-    return Promise.reject(error);
+    return Promise.reject(
+      error?.response?.data?.message || "Something went wrong!"
+    );
   }
 );
 

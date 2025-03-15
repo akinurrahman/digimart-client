@@ -6,34 +6,19 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAddCategory } from "../hooks/useAddCategory";
 
-type CategoryFormProps = {
-  onSubmit: (category: { name: string }) => void;
-  initialValues?: { name: string };
-};
-
-export function CategoryForm({
-  onSubmit,
-  initialValues = { name: "" },
-}: CategoryFormProps) {
-  const [name, setName] = useState(initialValues.name);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export function CategoryForm() {
+  const [name, setName] = useState("");
+  const { mutate: addAddNewCategory, isPending } = useAddCategory();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!name.trim()) {
       return;
     }
-
-    setIsSubmitting(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      onSubmit({ name });
-      setName("");
-      setIsSubmitting(false);
-    }, 500);
+    addAddNewCategory(name);
+    setName("");
   };
 
   return (
@@ -49,8 +34,8 @@ export function CategoryForm({
         />
       </div>
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? "Creating..." : "Create Category"}
+      <Button type="submit" className="w-full" disabled={isPending}>
+        {isPending ? "Creating..." : "Create Category"}
       </Button>
     </form>
   );

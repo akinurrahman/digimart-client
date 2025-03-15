@@ -38,34 +38,6 @@ export default function CategoryManagement() {
     parentCategory: Category;
   } | null>(null);
 
-  const addCategory = (category: Omit<Category, "id" | "subcategories">) => {
-    const newCategory: Category = {
-      ...category,
-      id: Date.now().toString(),
-      subcategories: [],
-    };
-    setCategories([...categories, newCategory]);
-  };
-
-  const addSubcategory = (subcategory: Omit<Subcategory, "id">) => {
-    const newSubcategory: Subcategory = {
-      ...subcategory,
-      id: Date.now().toString(),
-    };
-
-    setCategories(
-      categories.map((category) => {
-        if (category.id === subcategory.parentId) {
-          return {
-            ...category,
-            subcategories: [...category.subcategories, newSubcategory],
-          };
-        }
-        return category;
-      })
-    );
-  };
-
   const updateCategory = (updatedCategory: Category) => {
     setCategories(
       categories.map((category) =>
@@ -134,7 +106,7 @@ export default function CategoryManagement() {
             </h2>
           </div>
           <CardContent className="p-4">
-            <CategoryForm onSubmit={addCategory} />
+            <CategoryForm />
           </CardContent>
         </Card>
 
@@ -150,10 +122,7 @@ export default function CategoryManagement() {
                 No parent categories available. Create a category first.
               </div>
             ) : (
-              <SubcategoryForm
-                onSubmit={addSubcategory}
-                categories={categories}
-              />
+              <SubcategoryForm />
             )}
           </CardContent>
         </Card>
