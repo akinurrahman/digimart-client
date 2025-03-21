@@ -9,7 +9,7 @@ import { CategoryList } from "./category-list";
 import { EditCategoryDialog } from "./edit-category-dialog";
 import { EditSubcategoryDialog } from "./edit-subcategory-dialog";
 import { DeleteConfirmDialog } from "@/components/modals/delete-confirmation-dialog";
-import { useFetchCategories } from "../hooks/useFetchCategories";
+import { useFetchCategories } from "../../../../../hooks/category/use-fetch-categories";
 
 export type Category = {
   id: string;

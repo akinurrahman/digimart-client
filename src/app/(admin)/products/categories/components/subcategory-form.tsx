@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useFetchCategories } from "../hooks/useFetchCategories";
+import { useFetchCategories } from "../../../../../hooks/category/use-fetch-categories";
 import { useAddSubCategory } from "../hooks/useAddCategory";
 
 export function SubcategoryForm() {

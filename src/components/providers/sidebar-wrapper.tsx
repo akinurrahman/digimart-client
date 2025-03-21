@@ -19,7 +19,7 @@ const SidebarWrapper = ({
       <AppSidebar />
       <SidebarInset>
         <header>
-          <div className={`md:hidden`}>
+          <div className={`mt-5 ml-5 md:hidden`}>
             <SidebarTrigger />
           </div>
         </header>

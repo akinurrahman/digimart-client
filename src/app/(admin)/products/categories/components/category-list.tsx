@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useFetchCategories } from "../hooks/useFetchCategories";
+import { useFetchCategories } from "../../../../../hooks/category/use-fetch-categories";
 import { useDeleteCategory } from "../hooks/useDeleteCategory";
 import { DeleteConfirmDialog } from "@/components/modals/delete-confirmation-dialog";
 import { useDeleteDialog } from "@/hooks/use-delete-dialog";

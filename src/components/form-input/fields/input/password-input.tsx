@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
+import { InputFieldProps } from "../../types";
+import { ControllerRenderProps } from "react-hook-form";
 
 interface PasswordInputProps {
-  props: any;
-  field: any;
+  props: InputFieldProps;
+  field: ControllerRenderProps;
 }
 
 export function PasswordInput({ props, field }: PasswordInputProps) {

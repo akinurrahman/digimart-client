@@ -28,3 +28,15 @@ export const removeFromLocalStorage = (key: string) => {
     localStorage.removeItem(key);
   }
 };
+
+// Add a utility function to clear all form persistent data
+export const clearPersistentFormData = () => {
+  if (typeof window !== "undefined") {
+    const keys = Object.keys(localStorage);
+    keys.forEach((key) => {
+      if (key.startsWith("form_")) {
+        localStorage.removeItem(key);
+      }
+    });
+  }
+};

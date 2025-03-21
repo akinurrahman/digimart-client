@@ -1,5 +1,5 @@
 import { DeleteConfirmDialog } from "@/components/modals/delete-confirmation-dialog";
-import { useFetchSubCategories } from "../hooks/useFetchCategories";
+import { useFetchSubCategories } from "../../../../../hooks/category/use-fetch-categories";
 import { useDeleteSubCategory } from "../hooks/useDeleteCategory";
 import { useDeleteDialog } from "@/hooks/use-delete-dialog";
 import { Button } from "@/components/ui/button";

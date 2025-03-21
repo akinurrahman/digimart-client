@@ -6,28 +6,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "../ui/label";
-import { PasswordInput } from "./password-input";
-import { TextInput } from "./text-input";
-
-interface BaseFieldProps {
-  name: string;
-  label?: string;
-  description?: string;
-  placeholder?: string;
-}
-
-interface InputFieldProps extends BaseFieldProps {
-  fieldType: "input";
-  type?: string;
-}
-
-interface TextareaFieldProps extends BaseFieldProps {
-  fieldType: "textarea";
-}
-
-type FormInputProps = InputFieldProps | TextareaFieldProps;
+import { FormInputProps } from "./types";
+import { renderFieldByType } from "./render-field-by-types";
 
 export function FormInput(props: FormInputProps) {
   const { control } = useFormContext();
@@ -36,39 +17,23 @@ export function FormInput(props: FormInputProps) {
     <FormField
       control={control}
       name={props.name}
-      render={({ field }) => (
-        <FormItem>
-          <Label className="text-sm font-semibold text-gray-800">
-            {props.label}
-          </Label>
-          <FormControl>{renderFieldByType(props, field)}</FormControl>
-          {props.description && (
-            <FormDescription>{props.description}</FormDescription>
-          )}
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field }) => {
+        return (
+          <FormItem>
+            {props.label && (
+              <Label className="text-sm font-semibold text-gray-800">
+                {props.label}{" "}
+                {props.required && <span className="text-destructive">*</span>}
+              </Label>
+            )}
+            <FormControl>{renderFieldByType(props, field)}</FormControl>
+            {props.description && (
+              <FormDescription>{props.description}</FormDescription>
+            )}
+            <FormMessage />
+          </FormItem>
+        );
+      }}
     />
   );
-}
-
-function renderFieldByType(props: FormInputProps, field: any) {
-  switch (props.fieldType) {
-    case "input":
-      if (props.type === "password") {
-        return <PasswordInput props={props} field={field} />;
-      }
-      return <TextInput props={props} field={field} />;
-    case "textarea":
-      return (
-        <Textarea
-          placeholder={props.placeholder}
-          className="resize-none"
-          {...field}
-        />
-      );
-
-    default:
-      return null;
-  }
 }
