@@ -14,6 +14,7 @@ interface FormLayoutWrapperProps {
   disableNext?: boolean;
   disablePrevious?: boolean;
   nextButtonText?: string;
+  isLoading?: boolean;
 }
 
 const steps = [
@@ -53,6 +54,7 @@ export default function FormLayoutWrapper(props: FormLayoutWrapperProps) {
         onPrevious={props.onPrevious}
         disableNext={props.disableNext}
         disablePrevious={props.disablePrevious}
+        nextButtonText={props.nextButtonText}
       />
     </div>
   );

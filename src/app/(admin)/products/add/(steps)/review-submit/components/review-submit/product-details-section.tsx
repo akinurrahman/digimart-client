@@ -1,32 +1,36 @@
 import { Badge } from "@/components/ui/badge";
 import { getFromLocalStorage } from "@/utils";
-import {
-  ImagesAndSizesType,
-  ProductFormData,
-} from "@/validators/product/add-product-basic-info";
 import React from "react";
+import { useReviewSubmitContext } from "../../context";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 interface Category {
   label: string;
   value: string;
 }
 
-interface ProductDetailsProps {
-  basicInfo: ProductFormData["basicInfo"];
-  pricingAndStock: ProductFormData["pricingAndStock"];
-  sellingPrice: number | undefined;
-  additionalDetails: ProductFormData["additionalDetails"];
-  availableSizes: ImagesAndSizesType["sizes"];
-}
-
-const ProductDetailsSection = (props: ProductDetailsProps) => {
+const ProductDetailsSection = () => {
   const {
     basicInfo,
     pricingAndStock,
     sellingPrice,
     additionalDetails,
-    availableSizes,
-  } = props;
+    imagesAndSizes,
+  } = useReviewSubmitContext();
+
+  if (!basicInfo || !pricingAndStock || !additionalDetails || !imagesAndSizes) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>
+          Please complete all previous steps before reviewing your product
+          details.
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
   const categories: Category[] = getFromLocalStorage("categories");
   const subCategories: Category[] = getFromLocalStorage("subCategories");
 
@@ -74,7 +78,7 @@ const ProductDetailsSection = (props: ProductDetailsProps) => {
       <div>
         <span className="text-muted-foreground text-sm">Available Sizes:</span>
         <div className="mt-1 flex flex-wrap gap-2">
-          {availableSizes?.map((size) => (
+          {imagesAndSizes.sizes?.map((size) => (
             <Badge key={size} variant="outline">
               {size}
             </Badge>

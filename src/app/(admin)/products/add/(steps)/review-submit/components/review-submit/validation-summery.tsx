@@ -1,18 +1,19 @@
 import { AlertCircle, Check } from "lucide-react";
 import React from "react";
 import { validateProduct } from "../../utils/validate-product";
-import {
-  AdditionalDetailsType,
-  ImagesAndSizesType,
-} from "@/validators/product/add-product-basic-info";
+import { useReviewSubmitContext } from "../../context";
 
-interface ValidationProps {
-  images: ImagesAndSizesType["productImages"];
-  tags: AdditionalDetailsType["tags"];
-}
+const ValidationSummary = () => {
+  const { imagesAndSizes, additionalDetails } = useReviewSubmitContext();
 
-const ValidationSummary = ({ images, tags }: ValidationProps) => {
-  const validations = validateProduct(images, tags);
+  if (!imagesAndSizes || !additionalDetails) {
+    return null;
+  }
+
+  const validations = validateProduct(
+    imagesAndSizes.productImages,
+    additionalDetails.tags
+  );
 
   return (
     <div className="bg-muted rounded-lg p-4">

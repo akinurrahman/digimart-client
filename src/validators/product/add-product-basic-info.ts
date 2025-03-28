@@ -63,3 +63,8 @@ export type ProductFormData = {
   imagesAndSizes: ImagesAndSizesType;
   additionalDetails: AdditionalDetailsType;
 };
+
+export type FlattenedProductFormData = BasicProductType &
+  PriceAndStockType &
+  ImagesAndSizesType &
+  AdditionalDetailsType;

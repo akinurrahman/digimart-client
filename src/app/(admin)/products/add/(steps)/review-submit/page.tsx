@@ -1,19 +1,10 @@
-"use client";
-import FormLayoutWrapper from "../../layout-wrapper";
-import { useReviewSubmit } from "./hooks/use-review";
-import ReviewSubmitSection from "./components/review-submit";
+import ReviewSubmitForm from "./components";
+import { ReviewSubmitProvider } from "./context";
 
-const ReviewSubmit = () => {
-  const { onSubmit, onPrev, ...formData } = useReviewSubmit();
+export default function ReviewSubmitPage() {
   return (
-    <FormLayoutWrapper
-      onNext={onSubmit}
-      onPrevious={onPrev}
-      nextButtonText="Submit"
-    >
-      <ReviewSubmitSection {...formData} />
-    </FormLayoutWrapper>
+    <ReviewSubmitProvider>
+      <ReviewSubmitForm />
+    </ReviewSubmitProvider>
   );
-};
-
-export default ReviewSubmit;
+}

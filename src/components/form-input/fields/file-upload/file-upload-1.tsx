@@ -67,6 +67,7 @@ const FileUpload1 = ({ props }: FileUploadProp) => {
                   src={file.thumbnail}
                   alt="Thumbnail"
                   className="h-full w-full rounded-md object-cover"
+                  fill
                 />
               ) : (
                 <ImageIcon className="text-muted-foreground h-8 w-8" />

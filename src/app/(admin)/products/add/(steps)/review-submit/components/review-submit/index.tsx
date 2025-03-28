@@ -1,22 +1,19 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
-import { ProductFormData } from "@/validators/product/add-product-basic-info";
 import React from "react";
 import ValidationSummery from "./validation-summery";
 import ImageDisplaySection from "./image-display-section";
 import ProductDetailsSection from "./product-details-section";
+import { useReviewSubmitContext } from "../../context";
 
-interface ReviewProps {
-  basicInfo: ProductFormData["basicInfo"];
-  pricingAndStock: ProductFormData["pricingAndStock"];
-  imagesAndSizes: ProductFormData["imagesAndSizes"];
-  additionalDetails: ProductFormData["additionalDetails"];
-  sellingPrice: number | undefined;
-}
+const ReviewSubmit = () => {
+  const { imagesAndSizes, additionalDetails, basicInfo, pricingAndStock } =
+    useReviewSubmitContext();
 
-const ReviewSubmit = (props: ReviewProps) => {
-  const { imagesAndSizes, additionalDetails, ...rest } = props;
+  if (!imagesAndSizes || !additionalDetails || !basicInfo || !pricingAndStock) {
+    return null;
+  }
 
   return (
     <div className="space-y-6 p-6">
@@ -29,20 +26,13 @@ const ReviewSubmit = (props: ReviewProps) => {
 
       <div className="grid gap-6">
         <div className="grid gap-6 md:grid-cols-[1fr_2fr]">
-          <ImageDisplaySection productImages={imagesAndSizes.productImages} />
-          <ProductDetailsSection
-            {...rest}
-            additionalDetails={additionalDetails}
-            availableSizes={imagesAndSizes.sizes}
-          />
+          <ImageDisplaySection />
+          <ProductDetailsSection />
         </div>
 
         <Separator />
 
-        <ValidationSummery
-          images={imagesAndSizes.productImages}
-          tags={additionalDetails.tags}
-        />
+        <ValidationSummery />
 
         <div className="bg-primary/5 border-primary/20 rounded-lg border p-4">
           <h3 className="text-primary mb-2 font-medium">Ready to Submit</h3>

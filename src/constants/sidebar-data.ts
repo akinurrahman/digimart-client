@@ -11,7 +11,7 @@ export const adminNavItems = [
     url: "",
     icon: Package,
     items: [
-      { title: "Add Product", url: "/products/add" },
+      { title: "Add Product", url: "/products/add/basic-info" },
       { title: "Categories", url: "/products/categories" },
     ],
   },

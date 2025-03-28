@@ -29,6 +29,24 @@ export const removeFromLocalStorage = (key: string) => {
   }
 };
 
+export const removeBatchFromLocalStorage = (keys: string[]) => {
+  if (typeof window !== "undefined") {
+    keys.forEach((key) => localStorage.removeItem(key));
+  }
+};
+
+export const getBatchFromLocalStorage = (keys: string[]) => {
+  if (typeof window === "undefined") return null;
+
+  const result: Record<string, any> = {};
+  keys.forEach((key) => {
+    const item = localStorage.getItem(key);
+    result[key] = item ? JSON.parse(item) : null;
+  });
+
+  return result;
+};
+
 // Add a utility function to clear all form persistent data
 export const clearPersistentFormData = () => {
   if (typeof window !== "undefined") {

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import React from "react";
 
 interface NavInterface {
@@ -9,6 +9,7 @@ interface NavInterface {
   disableNext?: boolean;
   disablePrevious?: boolean;
   nextButtonText?: string;
+  isLoading?: boolean;
 }
 
 const NavButtons = (props: NavInterface) => {
@@ -22,8 +23,22 @@ const NavButtons = (props: NavInterface) => {
         <ArrowLeft />
         Previous
       </Button>
-      <Button onClick={props.onNext} disabled={props.disableNext}>
-        {props?.nextButtonText || "Save & Next"} <ArrowRight />
+      <Button
+        onClick={props.onNext}
+        disabled={props.disableNext || props.isLoading}
+      >
+        {props.isLoading ? (
+          <>
+            <Loader2 className="mr-2 animate-spin" />
+            Processing...
+          </>
+        ) : (
+          props?.nextButtonText || (
+            <>
+              Save & Next <ArrowRight />
+            </>
+          )
+        )}
       </Button>
     </div>
   );
