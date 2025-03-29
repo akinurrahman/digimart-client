@@ -8,10 +8,10 @@ export const adminNavItems = [
   },
   {
     title: "Products",
-    url: "",
+    url: "/products",
     icon: Package,
     items: [
-      { title: "Add Product", url: "/products/add/basic-info" },
+      { title: "Products", url: "/products" },
       { title: "Categories", url: "/products/categories" },
     ],
   },

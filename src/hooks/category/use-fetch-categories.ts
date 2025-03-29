@@ -1,18 +1,8 @@
 import { TIME_IN_MS } from "@/constants";
 import { ApiResponse } from "@/constants/interface-constants";
 import generateApis from "@/services/api/rest-api";
+import { Category, SubCategory } from "@/types/category-interface";
 import { useQuery } from "@tanstack/react-query";
-
-interface Category {
-  _id: string;
-  name: string;
-}
-
-interface SubCategory {
-  _id: string;
-  categoryId: string;
-  subCategory: string;
-}
 
 const categoriesApi = generateApis("/category");
 

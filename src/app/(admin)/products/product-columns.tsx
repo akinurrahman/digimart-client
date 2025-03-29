@@ -10,32 +10,20 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Check, FileText, MoreHorizontal, Pencil, X } from "lucide-react";
 import { format } from "date-fns";
 import { CustomColumnMeta } from "@/types/table-interface";
+import { Product } from "@/types/product-interface";
 
 type CustomColumnDef<TData> = ColumnDef<TData> & {
   accessorKey?: string;
   meta?: CustomColumnMeta;
 };
 
-interface Product {
-  createdAt: string;
-  product_name: string;
-  category: string;
-  sub_category?: string;
-  isBestSeller: boolean;
-  originalPrice: number;
-  discountPercentage: number;
-  stock?: number;
-  status?: string;
-  description?: string;
-  releaseDate?: string;
-}
-
 export const productColumns: CustomColumnDef<Product>[] = [
   {
     accessorKey: "createdAt",
     header: "CreatedAt",
     meta: {
-      fieldType: "date",
+      editable : false,
+      fieldType : "date"
     },
     cell: ({ row }) =>
       format(new Date(row.original.createdAt), "dd-MM-yyyy HH:mm"),
@@ -52,6 +40,7 @@ export const productColumns: CustomColumnDef<Product>[] = [
   {
     accessorKey: "category",
     header: "Category",
+    cell: ({ row }) => row.original.category.name,
     meta: {
       fieldType: "select",
       options: [
@@ -74,6 +63,7 @@ export const productColumns: CustomColumnDef<Product>[] = [
   {
     accessorKey: "originalPrice",
     header: "Original Price",
+    cell: ({ row }) => `₹${row.original.originalPrice}`,
     meta: {
       fieldType: "number",
       min: 0,
@@ -83,6 +73,7 @@ export const productColumns: CustomColumnDef<Product>[] = [
   {
     accessorKey: "discountPercentage",
     header: "Discount %",
+    cell: ({ row }) => `${row.original.discountPercentage}%`,
     meta: {
       fieldType: "number",
       min: 0,
