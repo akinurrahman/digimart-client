@@ -8,6 +8,8 @@ import { useFetchProducts } from "@/hooks/product/use-product";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import SearchInput from "@/components/shared/search-input";
+import FilterComponent from "@/components/shared/filter-menu";
 
 const Products = () => {
   const { data: products } = useFetchProducts();
@@ -17,11 +19,16 @@ const Products = () => {
   return (
     <div>
       <AutoBreadcrumb />
-      <div className="my-5 flex justify-end">
+      <div className="my-5 flex flex-col-reverse items-end justify-between gap-4 sm:flex-row">
+        <div className="flex flex-1 items-center gap-2">
+          <SearchInput />
+          <FilterComponent filters={["Active", "Inactive", "Pending"]} />
+        </div>
+
         <Link href="/products/add/basic-info">
           <Button>
             List Product
-            <ShoppingBag />
+            <ShoppingBag className="ml-2 h-4 w-4" />
           </Button>
         </Link>
       </div>

@@ -58,3 +58,26 @@ export const clearPersistentFormData = () => {
     });
   }
 };
+
+export const getInitials = (name: string): string | null => {
+  if (!name || typeof name !== "string" || !name.trim()) {
+    return null;
+  }
+
+  const words = name.trim().split(/\s+/);
+  const initials = words
+    .slice(0, 2)
+    .map((word) => word[0]?.toUpperCase() || "");
+  return initials.join("");
+};
+
+export function formatPropertyName(propertyName: string): string {
+  return (
+    propertyName
+      // Insert a space before each uppercase letter, symbol, or digit (but keep uppercase sequences together like "CGPA")
+      .replace(/([A-Z][a-z]+|[A-Z]+(?![a-z])|[%]|\d+)/g, " $&")
+      // Capitalize the first letter of each word
+      .replace(/^./, (str) => str.toUpperCase())
+      .trim()
+  );
+}

@@ -22,8 +22,8 @@ export const productColumns: CustomColumnDef<Product>[] = [
     accessorKey: "createdAt",
     header: "CreatedAt",
     meta: {
-      editable : false,
-      fieldType : "date"
+      editable: false,
+      fieldType: "date",
     },
     cell: ({ row }) =>
       format(new Date(row.original.createdAt), "dd-MM-yyyy HH:mm"),
